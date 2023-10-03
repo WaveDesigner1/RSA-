@@ -1,0 +1,38 @@
+import math #koniecznie zainstaluj bibliotekę
+from random import choice 
+
+lp = (227, 229,233,239,241,251,257,263,269,271,) #zbiór liczb pierwszych
+p = choice(lp) # pierwszy iloczyn
+q= choice(lp) # drugi iloczyn
+
+while p == q: # jeżeli p będzie takie samo jak q, kryptogramu nie da się rozszyfrować przynajmniej poniższą metodą
+	print('P = Q! Wybieram ze zbioru...')
+	p = choice(lp)
+	q= choice(lp)
+
+
+n = p*q # modulator 
+
+fn = (p-1) *(q-1) #chronić fn!!!
+
+e = 2**16+1 #klucz publiczny // liczba względnie pierwsza mniejsza od n
+
+d = pow(e,-1,fn) //1 #chronić p i q!!!  
+		
+print('Klucz publiczny: ',(e,n))
+print('Klucz prywatny: ',(d,n))
+
+M = 100
+print('Tekst oryginalny: ',M)
+
+
+
+C = M**e % n
+
+print('Tekst zaszyfrowany: ',C)
+
+
+
+Enc = C**d % n
+
+print('Tekst odszyfrowany: ',Enc)
